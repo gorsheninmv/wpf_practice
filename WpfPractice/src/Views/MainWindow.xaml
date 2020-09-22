@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfPractice.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mvvm="clr-namespace:WpfPractice.Mvvm"
+        Title="Проводник"
+        Height="450" Width="800">
+  <Grid ShowGridLines="False">
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="3*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- Дерево директорий -->
+    <TreeView Grid.Column="0"
+              ItemsSource="{Binding DirectoryTree}">
+
+      <i:Interaction.Behaviors>
+        <mvvm:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+      </i:Interaction.Behaviors>
+
+      <TreeView.Resources>
+        <Style TargetType="{x:Type TreeViewItem}">
+          <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+        </Style>
+      </TreeView.Resources>
+
+      <TreeView.ItemTemplate>
+        <HierarchicalDataTemplate ItemsSource="{Binding Subdirectories}">
+          <TextBlock Text="{Binding Name}" />
+        </HierarchicalDataTemplate>
+      </TreeView.ItemTemplate>
+
+      <TreeView.ContextMenu>
+        <ContextMenu>
+          <MenuItem IsEnabled="{Binding IsOpenEnabled}" Command="{Binding OpenTreeNode}"
+                    Header="Открыть" />
+        </ContextMenu>
+      </TreeView.ContextMenu>
+
+    </TreeView>
+
+    <!-- Разделитель -->
+    <GridSplitter Grid.Column="1"
+                  Width="1"
+                  VerticalAlignment="Stretch"
+                  ResizeBehavior="PreviousAndNext" />
+
+    <!-- Список файлов и папок -->
+    <ListBox Grid.Column="2"
+             ItemsSource="{Binding Files}" />
+  </Grid>
+</Window>

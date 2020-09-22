@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Nullable>enable</Nullable>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <NoWarn>1701;1702;0067</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <NoWarn>1701;1702;0067</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="src\Views\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="src\Views\DirectoryContent.xaml">
+        <Generator></Generator>
+      </Page>
+      <Page Update="src\Views\PopupWindow.xaml">
+        <Generator></Generator>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="src\Views\DirectoryContent.xaml.cs">
+        <DependentUpon>DirectoryContent.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="src\Views\PopupWindow.xaml.cs">
+        <DependentUpon>WindowTemplate.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
