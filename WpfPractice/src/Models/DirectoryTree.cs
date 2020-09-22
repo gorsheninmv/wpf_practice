@@ -129,6 +129,9 @@ namespace WpfPractice.Models
     /// </summary>
     private void LoadSubdirs()
     {
+      if (this.Subdirectories.Count > 0)
+        return;
+
       string nodeFullPath = this.GetFullPath();
 
       string[]? subdirsFullPath = null;
