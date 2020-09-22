@@ -31,7 +31,8 @@ namespace WpfPractice.Mvvm
 
     #region Методы
 
-    private static void SelectedItemPropertyChangedHandler(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    private static void SelectedItemPropertyChangedHandler(DependencyObject sender,
+      DependencyPropertyChangedEventArgs e)
     {
       if (e.NewValue is TreeViewItem item)
       {

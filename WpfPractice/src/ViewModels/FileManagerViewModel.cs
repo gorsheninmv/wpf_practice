@@ -64,7 +64,10 @@ namespace WpfPractice.ViewModels
 
     public bool IsOpenEnabled
     {
-      get { return this.isOpenEnabled; }
+      get
+      {
+        return this.isOpenEnabled;
+      }
 
       set
       {
@@ -100,11 +103,11 @@ namespace WpfPractice.ViewModels
     /// <returns></returns>
     private ObservableCollection<DirectoryTree> BuildDirectoryTree()
     {
-        string driveName = Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory);
+      string driveName = Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory);
 
-        var root = new DirectoryTree(driveName);
-        var ret = new ObservableCollection<DirectoryTree> { root };
-        return ret;
+      var root = new DirectoryTree(driveName);
+      var ret = new ObservableCollection<DirectoryTree> { root };
+      return ret;
     }
 
     /// <summary>
@@ -127,12 +130,12 @@ namespace WpfPractice.ViewModels
     /// </summary>
     private void UpdateFilesCollection()
     {
-       string[] files = this.selectedItem?.GetFiles() ?? new string[0];
+      string[] files = this.selectedItem?.GetFiles() ?? new string[0];
 
-       this.Files.Clear();
+      this.Files.Clear();
 
-       foreach (var file in files)
-         this.Files.Add(file);
+      foreach (var file in files)
+        this.Files.Add(file);
     }
 
     /// <summary>

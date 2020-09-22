@@ -10,4 +10,3 @@ namespace WpfPractice.Mvvm
     }
   }
 }
-

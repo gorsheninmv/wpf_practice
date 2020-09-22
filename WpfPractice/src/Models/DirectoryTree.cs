@@ -16,7 +16,7 @@ namespace WpfPractice.Models
     /// <summary>
     /// Родительская директория.
     /// </summary>
-    private DirectoryTree? parent;
+    private readonly DirectoryTree? parent;
 
     /// <summary>
     /// Название директории.
@@ -120,8 +120,8 @@ namespace WpfPractice.Models
     /// <returns>Полный путь директории.</returns>
     private string GetFullPath()
     {
-        var parentPath = this.parent?.GetFullPath() ?? string.Empty;
-        return Path.Combine(parentPath, this.name);
+      var parentPath = this.parent?.GetFullPath() ?? string.Empty;
+      return Path.Combine(parentPath, this.name);
     }
 
     /// <summary>
