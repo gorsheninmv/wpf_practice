@@ -1,8 +1,13 @@
 ﻿<Application x:Class="WpfPractice.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:WpfPractice.ViewModels"
              StartupUri="src/Views/MainWindow.xaml">
-    <Application.Resources>
+  <Application.Resources>
 
-    </Application.Resources>
+    <DataTemplate DataType="{x:Type viewModels:DirectoryContentViewModel}">
+      <ListBox ItemsSource="{Binding DirectoryContent}"/>
+    </DataTemplate>
+
+  </Application.Resources>
 </Application>

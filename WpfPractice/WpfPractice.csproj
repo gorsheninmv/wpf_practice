@@ -26,21 +26,6 @@
       <Page Update="src\Views\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
-      <Page Update="src\Views\DirectoryContent.xaml">
-        <Generator></Generator>
-      </Page>
-      <Page Update="src\Views\PopupWindow.xaml">
-        <Generator></Generator>
-      </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="src\Views\DirectoryContent.xaml.cs">
-        <DependentUpon>DirectoryContent.xaml</DependentUpon>
-      </Compile>
-      <Compile Update="src\Views\PopupWindow.xaml.cs">
-        <DependentUpon>WindowTemplate.xaml</DependentUpon>
-      </Compile>
     </ItemGroup>
 
 </Project>

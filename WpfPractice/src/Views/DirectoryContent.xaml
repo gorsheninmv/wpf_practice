@@ -1,9 +1,0 @@
-﻿<UserControl x:Class="WpfPractice.Views.DirectoryContent"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-  <!-- Содержимое директории -->
-  <ListBox ItemsSource="{Binding Content}"/>
-
-</UserControl>
-

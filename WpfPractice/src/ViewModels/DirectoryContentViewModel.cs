@@ -13,7 +13,32 @@ namespace WpfPractice.ViewModels
     /// <summary>
     /// Содержимое директории.
     /// </summary>
-    public ObservableCollection<string> Content { get; }
+    public ObservableCollection<string> DirectoryContent { get; }
+
+    /// <summary>
+    /// Полное имя директории.
+    /// </summary>
+    public string DirectoryFullPath { get; }
+
+    #endregion
+
+    #region Базовый класс
+
+    public override bool Equals(object obj)
+    {
+      if (ReferenceEquals(this, obj))
+        return true;
+
+      if (obj is DirectoryContentViewModel vm)
+        return this.DirectoryFullPath == vm.DirectoryFullPath;
+
+      return false;
+    }
+
+    public override int GetHashCode()
+    {
+      return base.GetHashCode();
+    }
 
     #endregion
 
@@ -23,9 +48,11 @@ namespace WpfPractice.ViewModels
     /// Конструктор.
     /// </summary>
     /// <param name="model">Модель содержимого директории.</param>
-    public DirectoryContentViewModel(ObservableCollection<string> model)
+    /// <param name="directoryFullPath">Полное имя директории.</param>
+    public DirectoryContentViewModel(ObservableCollection<string> model, string directoryFullPath)
     {
-      this.Content = model;
+      this.DirectoryContent = model;
+      this.DirectoryFullPath = directoryFullPath;
     }
 
     #endregion

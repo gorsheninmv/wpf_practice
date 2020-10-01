@@ -4,14 +4,16 @@ using WpfPractice.ViewModels;
 namespace WpfPractice.Views
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Главное окно программы.
   /// </summary>
   public partial class MainWindow : Window
   {
+    /// <summary>
+    /// Конструктор.
+    /// </summary>
     public MainWindow()
     {
-      this.DataContext = new FileManagerViewModel();
-      InitializeComponent();
+      this.InitializeComponent();
     }
   }
 }

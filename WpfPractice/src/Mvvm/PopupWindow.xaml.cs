@@ -6,7 +6,7 @@ namespace WpfPractice.Mvvm
   {
     public PopupWindow()
     {
-      InitializeComponent();
+      this.InitializeComponent();
     }
   }
 }

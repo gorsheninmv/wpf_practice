@@ -18,11 +18,11 @@ namespace WpfPractice.Models
     /// </summary>
     private readonly DirectoryTree? parent;
 
+    private string name;
+
     /// <summary>
     /// Название директории.
     /// </summary>
-    private string name;
-
     public string Name
     {
       get
@@ -33,15 +33,15 @@ namespace WpfPractice.Models
       set
       {
         this.name = value;
-        OnPropertyChanged(nameof(this.Name));
+        this.OnPropertyChanged(nameof(this.Name));
       }
     }
+
+    private bool isExpanded;
 
     /// <summary>
     /// Раскрыт ли узел для показа содержимого.
     /// </summary>
-    private bool isExpanded;
-
     public bool IsExpanded
     {
       get
@@ -56,7 +56,7 @@ namespace WpfPractice.Models
         if (this.isExpanded)
         {
           foreach (var directory in this.Subdirectories)
-            directory.LoadSubdirs();
+            directory.LoadSubdirectories();
         }
       }
     }
@@ -118,7 +118,7 @@ namespace WpfPractice.Models
     /// Возвращает полный путь директории.
     /// </summary>
     /// <returns>Полный путь директории.</returns>
-    private string GetFullPath()
+    public string GetFullPath()
     {
       var parentPath = this.parent?.GetFullPath() ?? string.Empty;
       return Path.Combine(parentPath, this.name);
@@ -127,7 +127,7 @@ namespace WpfPractice.Models
     /// <summary>
     /// Подгрузить поддиректории.
     /// </summary>
-    private void LoadSubdirs()
+    private void LoadSubdirectories()
     {
       if (this.Subdirectories.Count > 0)
         return;
@@ -164,10 +164,10 @@ namespace WpfPractice.Models
     /// <remarks>Если директория корневая, то родительская директория null.</remarks>
     public DirectoryTree(string name) : this(name, null)
     {
-      this.LoadSubdirs();
+      this.LoadSubdirectories();
 
       foreach (var directory in this.Subdirectories)
-        directory.LoadSubdirs();
+        directory.LoadSubdirectories();
     }
 
     /// <summary>

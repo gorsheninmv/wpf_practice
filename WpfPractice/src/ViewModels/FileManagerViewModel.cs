@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Input;
 using WpfPractice.Models;
 using WpfPractice.Mvvm;
-using WpfPractice.Views;
 
 namespace WpfPractice.ViewModels
 {
@@ -27,11 +26,11 @@ namespace WpfPractice.ViewModels
     /// </summary>
     public ObservableCollection<string> Files { get; }
 
+    private DirectoryTree? selectedItem;
+
     /// <summary>
     /// Выбранный элемент дерева папок.
     /// </summary>
-    private DirectoryTree? selectedItem;
-
     public object? SelectedItem
     {
       get
@@ -57,11 +56,11 @@ namespace WpfPractice.ViewModels
       }
     }
 
+    private bool isOpenEnabled;
+
     /// <summary>
     /// Разрешено ли открывать выбранную папку.
     /// </summary>
-    private bool isOpenEnabled;
-
     public bool IsOpenEnabled
     {
       get
@@ -72,21 +71,16 @@ namespace WpfPractice.ViewModels
       set
       {
         this.isOpenEnabled = value;
-        OnPropertyChanged(nameof(this.IsOpenEnabled));
+        this.OnPropertyChanged(nameof(this.IsOpenEnabled));
       }
     }
+
+    private ICommand? openTreeNode;
 
     /// <summary>
     /// Команда открыть.
     /// </summary>
-    private ICommand? openTreeNode;
-
     public ICommand OpenTreeNode => this.openTreeNode ??= new Command<object>(this.OpenContentView);
-
-    /// <summary>
-    /// Сервис вызова popup окна.
-    /// </summary>
-    private PopupWindowService<DirectoryContent>? winService;
 
     /// <summary>
     /// Содержимое выбранной папки в дереве.
@@ -116,13 +110,9 @@ namespace WpfPractice.ViewModels
     /// <param name="sender">Отправитель команды.</param>
     private void OpenContentView(object sender)
     {
-      if (this.winService == null)
-      {
-        var viewModel = new DirectoryContentViewModel(this.directoryContent);
-        winService = new PopupWindowService<DirectoryContent>(viewModel, "Обзор содержимого...");
-      }
-
-      winService.Show();
+      string directoryPath = this.selectedItem?.GetFullPath() ?? string.Empty;
+      var viewModel = new DirectoryContentViewModel(this.directoryContent, directoryPath);
+      PopupWindowService.OpenViewModel(viewModel, directoryPath);
     }
 
     /// <summary>

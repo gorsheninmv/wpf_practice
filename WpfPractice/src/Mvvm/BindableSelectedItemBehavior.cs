@@ -23,8 +23,8 @@ namespace WpfPractice.Mvvm
     /// </summary>
     public object SelectedItem
     {
-      get { return (object) GetValue(SelectedItemProperty); }
-      set { SetValue(SelectedItemProperty, value); }
+      get { return this.GetValue(SelectedItemProperty); }
+      set { this.SetValue(SelectedItemProperty, value); }
     }
 
     #endregion
