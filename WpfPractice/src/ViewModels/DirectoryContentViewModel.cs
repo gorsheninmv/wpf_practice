@@ -11,7 +11,7 @@ namespace WpfPractice.ViewModels
     #region Поля и свойства
 
     /// <summary>
-    /// Содержимое директории.
+    /// Имена файлов и папок, содержащихся в директории.
     /// </summary>
     public ObservableCollection<string> DirectoryContent { get; }
 
