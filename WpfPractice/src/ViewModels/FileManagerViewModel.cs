@@ -24,7 +24,7 @@ namespace WpfPractice.ViewModels
     /// <summary>
     /// Список файлов.
     /// </summary>
-    public ObservableCollection<string> Files { get; }
+    public ObservableCollection<string> Files { get; } = new ObservableCollection<string>();
 
     private DirectoryTree? selectedItem;
 
@@ -44,13 +44,11 @@ namespace WpfPractice.ViewModels
         {
           this.selectedItem = selectedItem;
           this.UpdateFilesCollection();
-          this.UpdateDirectoryContentCollection();
           this.IsOpenEnabled = true;
         }
         else
         {
           this.Files.Clear();
-          this.directoryContent.Clear();
           this.IsOpenEnabled = false;
         }
       }
@@ -81,12 +79,6 @@ namespace WpfPractice.ViewModels
     /// Команда открыть.
     /// </summary>
     public ICommand OpenTreeNode => this.openTreeNode ??= new Command<object>(this.OpenContentView);
-
-    /// <summary>
-    /// Содержимое выбранной папки в дереве.
-    /// </summary>
-    private readonly ObservableCollection<string> directoryContent;
-
     #endregion
 
     #region Методы
@@ -111,7 +103,8 @@ namespace WpfPractice.ViewModels
     private void OpenContentView(object sender)
     {
       string directoryPath = this.selectedItem?.GetFullPath() ?? string.Empty;
-      var viewModel = new DirectoryContentViewModel(this.directoryContent, directoryPath);
+      ObservableCollection<string> contentCollection = this.GetDirectoryContentCollection();
+      var viewModel = new DirectoryContentViewModel(contentCollection, directoryPath);
       PopupWindowService.OpenViewModel(viewModel, directoryPath);
     }
 
@@ -131,17 +124,19 @@ namespace WpfPractice.ViewModels
     /// <summary>
     /// Обновить содержимое поля <see cref="directoryContent"/>.
     /// </summary>
-    private void UpdateDirectoryContentCollection()
+    private ObservableCollection<string> GetDirectoryContentCollection()
     {
       IEnumerable<string> files = this.selectedItem?.GetFiles() ?? new string[0];
       IEnumerable<string> directories = (this.selectedItem?.GetDirectories() ?? new string[0])
         .Select(directory => "+ " + directory);
       IEnumerable<string> items = directories.Concat(files);
 
-      this.directoryContent.Clear();
+      var ret = new ObservableCollection<string>();
 
       foreach (var item in items)
-        this.directoryContent.Add(item);
+        ret.Add(item);
+
+      return ret;
     }
 
     #endregion
@@ -153,7 +148,6 @@ namespace WpfPractice.ViewModels
     /// </summary>
     public FileManagerViewModel()
     {
-      this.directoryContent = new ObservableCollection<string>();
       this.Files = new ObservableCollection<string>();
       this.DirectoryTree = this.BuildDirectoryTree();
     }

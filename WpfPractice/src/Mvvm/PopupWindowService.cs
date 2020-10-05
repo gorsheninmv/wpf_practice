@@ -48,6 +48,8 @@ namespace WpfPractice.Mvvm
       {
         if (openedPopup.WindowState == WindowState.Minimized)
           openedPopup.WindowState = WindowState.Normal;
+        else
+          openedPopup.Activate();
       }
     }
 
