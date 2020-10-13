@@ -26,6 +26,9 @@
       <Page Update="src\Views\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
+      <Page Update="src\Views\PopupWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
     </ItemGroup>
 
 </Project>

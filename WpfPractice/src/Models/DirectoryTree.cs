@@ -85,7 +85,7 @@ namespace WpfPractice.Models
       }
       catch (UnauthorizedAccessException)
       {
-        fileFullPaths = new string[0];
+        fileFullPaths = Array.Empty<string>();
       }
 
       var ret = fileFullPaths.Select(Path.GetFileName).ToArray();
@@ -107,7 +107,7 @@ namespace WpfPractice.Models
       }
       catch (UnauthorizedAccessException)
       {
-        directoryFullPaths = new string[0];
+        directoryFullPaths = Array.Empty<string>();
       }
 
       var ret = directoryFullPaths.Select(Path.GetFileName).ToArray();

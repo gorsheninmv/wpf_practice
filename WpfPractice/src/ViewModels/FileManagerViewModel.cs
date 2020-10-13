@@ -73,12 +73,11 @@ namespace WpfPractice.ViewModels
       }
     }
 
-    private ICommand? openTreeNode;
-
     /// <summary>
     /// Команда открыть.
     /// </summary>
-    public ICommand OpenTreeNode => this.openTreeNode ??= new Command<object>(this.OpenContentView);
+    public ICommand OpenTreeNode { get; }
+
     #endregion
 
     #region Методы
@@ -86,7 +85,7 @@ namespace WpfPractice.ViewModels
     /// <summary>
     /// Построить дерево папок.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Дерево папок.</returns>
     private ObservableCollection<DirectoryTree> BuildDirectoryTree()
     {
       string driveName = Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory);
@@ -113,7 +112,7 @@ namespace WpfPractice.ViewModels
     /// </summary>
     private void UpdateFilesCollection()
     {
-      string[] files = this.selectedItem?.GetFiles() ?? new string[0];
+      string[] files = this.selectedItem?.GetFiles() ?? Array.Empty<string>();
 
       this.Files.Clear();
 
@@ -126,8 +125,8 @@ namespace WpfPractice.ViewModels
     /// </summary>
     private ObservableCollection<string> GetDirectoryContentCollection()
     {
-      IEnumerable<string> files = this.selectedItem?.GetFiles() ?? new string[0];
-      IEnumerable<string> directories = (this.selectedItem?.GetDirectories() ?? new string[0])
+      IEnumerable<string> files = this.selectedItem?.GetFiles() ?? Array.Empty<string>();
+      IEnumerable<string> directories = (this.selectedItem?.GetDirectories() ?? Array.Empty<string>())
         .Select(directory => "+ " + directory);
       IEnumerable<string> items = directories.Concat(files);
 
@@ -150,6 +149,7 @@ namespace WpfPractice.ViewModels
     {
       this.Files = new ObservableCollection<string>();
       this.DirectoryTree = this.BuildDirectoryTree();
+      this.OpenTreeNode = new Command<object>(this.OpenContentView);
     }
 
     #endregion

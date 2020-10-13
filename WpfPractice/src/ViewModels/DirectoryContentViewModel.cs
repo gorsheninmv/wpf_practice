@@ -37,7 +37,7 @@ namespace WpfPractice.ViewModels
 
     public override int GetHashCode()
     {
-      return base.GetHashCode();
+      return this.DirectoryFullPath.GetHashCode();
     }
 
     #endregion
